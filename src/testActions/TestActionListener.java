@@ -1,7 +1,6 @@
 package testActions;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import static main.mainClass.*;
 import java.awt.event.*;
 
 
@@ -18,12 +17,14 @@ public class TestActionListener implements ActionListener {
 	 * @param actionEvent
 	 */
 	public void actionPerformed(ActionEvent actionEvent) {
-		//generates message with some rows
+		loginFrame.setVisible(false);
+		if (analysesFrame == null) {
+			analysesFrame = formAppearanceManager.createScrollFrameForManeFrame();
+		}
+		analysesFrame.setVisible(true);
 		
-		String message = "string1\n"
-				+"string2\n"
-				+"string3";
-		JOptionPane.showMessageDialog(new JFrame(), message,"Some rows", JOptionPane.ERROR_MESSAGE);
+
+		
 		
 	}
 

@@ -75,7 +75,11 @@ public class ConnectionManager {
 			return this.getDBConnection().createStatement().executeQuery(sqlRequest);
 	}
 	
-	//printing a ResultSet
+	/**
+	 * printing a ResultSet
+	 * @param rs data to print
+	 * @throws SQLException if smth is not ok =)
+	 */
 	public void printResultSet(ResultSet rs) throws SQLException{
 		ResultSetMetaData metaData = rs.getMetaData();
 		System.out.println(metaData.getTableName(1));
@@ -90,6 +94,7 @@ public class ConnectionManager {
 				System.out.print(rs.getString(j)+"			|			");
 			}
 		}
+	
 		
 	}
 	
