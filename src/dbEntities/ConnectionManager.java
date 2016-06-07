@@ -72,7 +72,7 @@ public class ConnectionManager {
 	 * @throws SQLException if smth is not ok
 	 */
 	public ResultSet executeRequest(String sqlRequest) throws SQLException,ClassNotFoundException{
-			return this.getDBConnection().createStatement().executeQuery(sqlRequest);
+			return this.getDBConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE).executeQuery(sqlRequest);
 	}
 	
 	/**

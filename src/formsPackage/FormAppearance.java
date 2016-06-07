@@ -109,24 +109,17 @@ public class FormAppearance {
                 rs.beforeFirst();
             }
             catch(SQLException ex) {
-            	System.out.println("Error while calculating rowCount!");
+            	System.out.println("Exception at row counting!");
                 ex.printStackTrace();;
             }
-            while (rs.next()){
-         	}
             System.out.println(rowCount+"    "+columnNames.length);
           	data = new String[rowCount][columnNames.length];
-            
-//            for (int i = dataCount; i > 0 ; i++) {    
-          	int i = rowCount;
-            while (rs.previous()) {	
-            	i--;
-            	for (int j = 0; j < columnNames.length; j++){
-            		data[i][j] = rs.getObject(j+1);
+          	while (rs.next()) {
+          		rowCount--;
+          		for (int j = 0; j < columnNames.length; j++){
+            		data[rowCount][j] = rs.getString(j+1);
             		}
-            }
-         	
-        	
+          	}
         	
         } catch (SQLException e) {
         	System.out.println("Exception with DB access!");
