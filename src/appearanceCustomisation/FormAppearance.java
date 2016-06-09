@@ -1,15 +1,16 @@
-package formsPackage;
+package appearanceCustomisation;
 import javax.swing.*;
+
+import dbEntities.ConnectionManager;
+import formsPackage.FrameObjectsBuilder;
 
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
-import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import testActions.*;
-import appearanceCustomisation.FrameObjectsBuilder;
 import main.mainClass;
 
 public class FormAppearance {
@@ -32,7 +33,7 @@ public class FormAppearance {
 		
 		/**
 		 * First, creating panel, 
-		 *where other components should be placed
+		 * where other components should be placed
 		*/
 		JPanel totalGUI = new JPanel(); // creating panel
 		totalGUI.setLayout(null);
@@ -40,29 +41,35 @@ public class FormAppearance {
 		//creating border
 		totalGUI.setBorder(BorderFactory.createTitledBorder("Hello! This program should be used for work with table of DB Oracle."));
 		
-//		/**
-//		 * creating greetings label
-//		 */
-//		JLabel greetingLabel = builder.createLabel("Hello! This program should be used for work with table of DB Oracle.", 0, -25, 500, 100, Color.blue);
-//		totalGUI.add(greetingLabel); //adding textlabel to the panel
 		
 		
 		/**
 		 * Adding text field for username
 		 */
 		JTextField userNameField = builder.createTextField("Username", MainFrameLength - 500, 20, 150, 50);
+		//just for tests
+		userNameField.setText("den");
 		
 		/**
 		 * Adding password field for user
 		 */
 		JTextField passwordField = builder.createTextField("Password", MainFrameLength - 325, 20, 150, 50);
+		//just for tests
+		passwordField.setText("parol123");
+		
+		/**
+		 * Adding sqlRequest field
+		 */
+		JTextField sqlRequestField = builder.createTextField("SQL Request", MainFrameLength - 500, 80, 325, 50);
+		//just for tests
+		sqlRequestField.setText("select * from hr.employees");
 				
 		/**
 		 * creating connection button
 		 */
 		JButton connectButton = builder.createButton("Connect", MainFrameLength - 150, 30, 100, 30);
 		//creating action listener
-		ActionListener actionListener = new TestActionListener();
+		ActionListener actionListener = new TestActionListener(userNameField,passwordField,sqlRequestField);
 		//adding action listener to button
 		connectButton.addActionListener(actionListener);//link action to the button
 		
@@ -79,40 +86,36 @@ public class FormAppearance {
 		 */
 		totalGUI.add(passwordField);
 		totalGUI.add(userNameField);
+		totalGUI.add(sqlRequestField);
 		totalGUI.add(connectButton);
 		totalGUI.add(exitButton);
-//		totalGUI.add(mainTable);
 			
 		return totalGUI;
 	}
 	
 	/**
-	 * creating s scroll Frame for analyses frame
+	 * creating scroll Frame for analyses
 	 * @return
+	 * @throws SQLException if smth wrong with SQL part of the connection
+	 * @throws ClassNotFoundException if smth wrong with JDBC
 	 */
-	public JFrame createScrollFrameForManeFrame () {
-		JFrame frame = new JFrame("Test frame");
+	public JFrame createScrollFrameForAnalyses (JTextField userNameField, JTextField passwordField, JTextField sqlRequestField) throws ClassNotFoundException, SQLException {
+		JFrame frame = new JFrame(/*"Analys frame"*/sqlRequestField.getText());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         String[] columnNames;
         Object[][] data;
-        try {
-        	ResultSet rs = mainClass.dbConnectionExecute();
+        ConnectionManager cm = new ConnectionManager(userNameField.getText(),passwordField.getText());
+        	ResultSet rs = cm.executeRequest(sqlRequestField.getText());
         	ResultSetMetaData metaData = rs.getMetaData();
         	columnNames = new String[metaData.getColumnCount()];
         	for (int i = 0; i < columnNames.length; i++) {
         		columnNames[i] = metaData.getColumnName(i+1);
             };
             int rowCount = 0;
-            try {
                 rs.last();
                 rowCount = rs.getRow();
                 rs.beforeFirst();
-            }
-            catch(SQLException ex) {
-            	System.out.println("Exception at row counting!");
-                ex.printStackTrace();;
-            }
-            System.out.println(rowCount+"    "+columnNames.length);
+//            System.out.println(rowCount+"    "+columnNames.length);
           	data = new String[rowCount][columnNames.length];
           	while (rs.next()) {
           		rowCount--;
@@ -121,17 +124,6 @@ public class FormAppearance {
             		}
           	}
         	
-        } catch (SQLException e) {
-        	System.out.println("Exception with DB access!");
-        	e.printStackTrace();
-        	columnNames = null;
-        	data = null;
-        }
-        
-       
-         
-        
-         
         JTable table = new JTable(data, columnNames);
          
         JScrollPane scrollPane = new JScrollPane(table);

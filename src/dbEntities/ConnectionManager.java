@@ -16,8 +16,9 @@ public class ConnectionManager {
 	private String user = "den",pass = "parol123",dataBase = "jdbc:oracle:thin:@localhost:1521:orcl";
 	
 	/**
+	 * @category testing
 	 * constructor without creating a connection
-	 * @param b dog-nail
+	 * @param b 
 	 */
 	public ConnectionManager(boolean b){}
 
@@ -94,8 +95,6 @@ public class ConnectionManager {
 				System.out.print(rs.getString(j)+"			|			");
 			}
 		}
-	
-		
 	}
 	
 	//only getters and setters below

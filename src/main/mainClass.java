@@ -1,18 +1,16 @@
 package main;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.JFrame;
-import dbEntities.ConnectionManager;
-import formsPackage.FormAppearance;;
+
+import appearanceCustomisation.FormAppearance;
 
 public class mainClass {
 	public static JFrame loginFrame = new JFrame();
 	public static JFrame analysesFrame;
 	public static FormAppearance formAppearanceManager = new FormAppearance();
-	private static String REQUEST = "select * from hr.employees";
-	private static ResultSet rs = null;
-	private static ConnectionManager connectionManager;
+//	private static String REQUEST = "select * from hr.employees";
+//	private static ResultSet rs = null;
+//	private static ConnectionManager connectionManager;
 	
 	/**
 	 * size of the main form
@@ -37,43 +35,7 @@ public class mainClass {
 		loginFrame.setSize(WINDOWSIZE[0],WINDOWSIZE[1]);
 		loginFrame.setVisible(true);
 		loginFrame.setLocationRelativeTo(null);
-	
-		
-		
 	}
-	
-	
-	
-	
-	/**
-	 * temp method for developing
-	 */
-	public static ResultSet dbConnectionExecute(){
-		//db connection code
-		try {
-			connectionManager= new ConnectionManager();
-		} catch (SQLException e) {
-			System.out.println("SQLException at creating ConnectionManager object!");
-			e.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			System.out.println("ClassNotFoundException at creating ConnectionManager object!");
-			e1.printStackTrace();
-			connectionManager = new ConnectionManager(false);
-		}
-		try {
-			return connectionManager.executeRequest(REQUEST);
-		} catch (ClassNotFoundException e) {
-			System.out.println("ClassNotFoundException Error at request executing!");
-			e.printStackTrace();
-		} catch (SQLException e1) {
-			System.out.println("SQLException Error at request executing!");
-			e1.printStackTrace();
-		}
-		return null;
-		
-	}
-	
-	
 	
 	//getters and setters
 	/**
@@ -90,5 +52,3 @@ public class mainClass {
 	}
 
 }
-//пример диалога/ошибки
-////JOptionPane.showMessageDialog(new JFrame(), message,"Some rows", JOptionPane.ERROR_MESSAGE);
