@@ -2,12 +2,21 @@ package main;
 
 import javax.swing.JFrame;
 
-import appearanceCustomisation.FormAppearance;
+import appearanceCustomisation.FrameFactory;
+import customListeners.SqlRequestExecuteListener;
+import formsAndFrames.AnalysesFrame;
+import formsAndFrames.LoginFrame;
+import formsAndFrames.SqlRequestFrame;
 
+//TODO javadoc comments and backListener - should show parent, not always login
 public class mainClass {
-	public static JFrame loginFrame = new JFrame();
-	public static JFrame analysesFrame;
-	public static FormAppearance formAppearanceManager = new FormAppearance();
+	public static LoginFrame loginFrame;
+	public static AnalysesFrame analysesFrame;
+	public static SqlRequestFrame requestFrame;
+	/**
+	 * @deprecated
+	 */
+	public static FrameFactory frameFactoryManager = new FrameFactory();
 //	private static String REQUEST = "select * from hr.employees";
 //	private static ResultSet rs = null;
 //	private static ConnectionManager connectionManager;
@@ -26,15 +35,10 @@ public class mainClass {
 	 */
 	public static void main(String[] args) {
 		JFrame.setDefaultLookAndFeelDecorated(true);
-//		JFrame mainFrame = new JFrame("Header of the window");
-
-//		FormAppearance formAppearanceManager = new FormAppearance(); 
 		
-		loginFrame.setContentPane(formAppearanceManager.createContentPaneForLoginFrame());
-		loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		loginFrame.setSize(WINDOWSIZE[0],WINDOWSIZE[1]);
+		loginFrame = new LoginFrame(WINDOWSIZE[0], WINDOWSIZE[1]);
 		loginFrame.setVisible(true);
-		loginFrame.setLocationRelativeTo(null);
+		
 	}
 	
 	//getters and setters

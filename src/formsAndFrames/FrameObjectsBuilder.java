@@ -1,4 +1,4 @@
-package formsPackage;
+package formsAndFrames;
 
 import java.awt.Color;
 
