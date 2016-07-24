@@ -4,22 +4,29 @@ import javax.swing.JFrame;
 
 import appearanceCustomisation.FrameFactory;
 import customListeners.SqlRequestExecuteListener;
-import formsAndFrames.AnalysesFrame;
+import formsAndFrames.AnalysesDataFrame;
 import formsAndFrames.LoginFrame;
 import formsAndFrames.SqlRequestFrame;
+import formsAndFrames.AnalysesFrame;
 
 //TODO javadoc comments and backListener - should show parent, not always login
 public class mainClass {
+	/**
+	 * login frame of the program
+	 */
 	public static LoginFrame loginFrame;
-	public static AnalysesFrame analysesFrame;
+	/**
+	 * analyses data frame of the program
+	 */
+	public static AnalysesDataFrame analysesDataFrame;
+	/**
+	 * request frame of the program
+	 */
 	public static SqlRequestFrame requestFrame;
 	/**
-	 * @deprecated
+	 * analyses frame of the program
 	 */
-	public static FrameFactory frameFactoryManager = new FrameFactory();
-//	private static String REQUEST = "select * from hr.employees";
-//	private static ResultSet rs = null;
-//	private static ConnectionManager connectionManager;
+	public static AnalysesFrame analysesFrame;
 	
 	/**
 	 * size of the main form

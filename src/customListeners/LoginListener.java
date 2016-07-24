@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import formsAndFrames.AnalysesFrame;
+import formsAndFrames.AnalysesDataFrame;
 import formsAndFrames.SqlRequestFrame;
 
 
@@ -39,7 +39,7 @@ public class LoginListener implements ActionListener {
 	
 	
 	/**
-	 * actions to perform on event
+	 * creates and shows requestFrame
 	 * @param actionEvent
 	 */
 	public void actionPerformed(ActionEvent actionEvent) {

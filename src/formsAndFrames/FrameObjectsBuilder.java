@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTable;
@@ -35,6 +36,22 @@ public class FrameObjectsBuilder {
 		button.setLocation(xLocation, yLocation);
 		button.setSize(xSize, ySize);
 		return button;
+		
+	}
+	/**
+	 * 
+	 * @param possibleActions possible actions to perform
+	 * @param xLocation x coordinate to set in location
+	 * @param yLocation y coordinate to set in location
+	 * @param xSize x coordinate size
+	 * @param ySize y coordinate size
+	 * @return JButton with custom properties
+	 */
+	public JComboBox createComboBox(String[] possibleActions, int xLocation, int yLocation, int xSize, int ySize){
+		JComboBox possibleActionsCMB = new JComboBox(possibleActions);
+		possibleActionsCMB.setLocation(xLocation, yLocation);
+		possibleActionsCMB.setSize(xSize, ySize);
+		return possibleActionsCMB;
 		
 	}
 	

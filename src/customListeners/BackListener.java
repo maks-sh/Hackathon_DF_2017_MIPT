@@ -8,13 +8,13 @@ import javax.swing.JFrame;
 import static main.mainClass.*;
 
 /**
- * listener for 3rd button (test)
+ * listener for backButton
  * @author DenRUS
  *
  */
-public class ExitListener implements ActionListener {
+public class BackListener implements ActionListener {
 	/**
-	 * frame to close
+	 * frame to close and frame to show
 	 */
 	JFrame frame,parent;
 	
@@ -22,7 +22,7 @@ public class ExitListener implements ActionListener {
 	 * associates the frame with the listener
 	 * @param frame
 	 */
-	public ExitListener(JFrame frame,JFrame parent) {
+	public BackListener(JFrame frame,JFrame parent) {
 		this.frame = frame;	
 		this.parent = parent;
 	}

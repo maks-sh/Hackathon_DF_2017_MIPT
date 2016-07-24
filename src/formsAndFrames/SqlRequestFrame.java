@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import customListeners.ExitListener;
+import customListeners.BackListener;
 import customListeners.SqlRequestExecuteListener;
 import dbEntities.DataBaseManager;
 
@@ -34,7 +34,7 @@ public class SqlRequestFrame extends JFrame{
 	public SqlRequestFrame(String userName, String password, String database,JFrame parent) throws ClassNotFoundException, SQLException {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		this.dbManager = new DataBaseManager(userName,password,database);
-		int xSize = 570, ySize = 170;
+		int xSize = 620, ySize = 170;
 		this.setTitle(userName);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -45,7 +45,8 @@ public class SqlRequestFrame extends JFrame{
 	
 	/**
 	 * creates a content pane for the frame
-	 * @param user connected to the data base
+	 * @param user user connected to the data base
+	 * @param parent parent frame to show in case of "back"
 	 * @return custom JPanel
 	 */
 	public JPanel createContentPaneForSqlRequestFrame(String user,JFrame parent) {
@@ -53,20 +54,18 @@ public class SqlRequestFrame extends JFrame{
 		
 		JPanel totalGUI = new JPanel();
 		totalGUI.setLayout(null);
-		totalGUI.setBorder(BorderFactory.createTitledBorder("You are connected as: \""+user));
+		totalGUI.setBorder(BorderFactory.createTitledBorder("You are connected as: \""+user+"\""));
 		
-		
-		
-		JButton backButton = builder.createButton("Back", 450, 90, 100, 30);
-		ActionListener backListener = new ExitListener(this,parent);
+		JButton backButton = builder.createButton("Back", 450, 90, 150, 30);
+		ActionListener backListener = new BackListener(this,parent);
 		backButton.addActionListener(backListener);
 		
 		JTextField sqlRequestField = builder.createTextField("SQL Request", 20, 20, 400, 50);
 		//TODO just for tests
 		sqlRequestField.setText("select * from hr.employees");
 		
-		JButton executeButton = builder.createButton("Execute request", 450, 30, 100, 30);
-		ActionListener sqlRequestExecute = new SqlRequestExecuteListener(dbManager,sqlRequestField);
+		JButton executeButton = builder.createButton("Execute request", 450, 30, 150, 30);
+		ActionListener sqlRequestExecute = new SqlRequestExecuteListener(dbManager,sqlRequestField, this);
 		executeButton.addActionListener(sqlRequestExecute);
 		
 		totalGUI.add(executeButton);

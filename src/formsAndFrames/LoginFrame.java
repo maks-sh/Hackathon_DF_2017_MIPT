@@ -8,9 +8,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import customListeners.ExitListener;
+import customListeners.BackListener;
 import customListeners.LoginListener;
 
+/**
+ * login frame of the program
+ * @author DenRUS
+ *
+ */
 public class LoginFrame extends JFrame {
 	/**
 	 * 
@@ -54,7 +59,7 @@ public class LoginFrame extends JFrame {
 		/**
 		 * Adding password field for user
 		 */
-		JTextField passwordField = builder.createTextField("Password", mainFrameLength - 325, 20, 150, 50);
+		JTextField passwordField = builder.createPasswordField("Password", mainFrameLength - 325, 20, 150, 50);
 		//TODO just for tests
 		passwordField.setText("parol123");
 		
@@ -79,7 +84,7 @@ public class LoginFrame extends JFrame {
 		 * creating exit button
 		 */
 		JButton exitButton = builder.createButton("Exit", mainFrameLength - 150, mainFrameHeight - 100, 100, 30);
-		ActionListener exitListener = new ExitListener(this,null);
+		ActionListener exitListener = new BackListener(this,null);
 		exitButton.addActionListener(exitListener);
         
 		/**
@@ -93,5 +98,4 @@ public class LoginFrame extends JFrame {
 			
 		return totalGUI;
 	}
-
 }

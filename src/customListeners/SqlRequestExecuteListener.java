@@ -7,7 +7,9 @@ import javax.swing.JTextField;
 import dbEntities.DataBaseManager;
 
 import static main.mainClass.*;
+import formsAndFrames.AnalysesDataFrame;
 import formsAndFrames.AnalysesFrame;
+import formsAndFrames.SqlRequestFrame;
 
 import java.awt.event.*;
 import java.sql.SQLException;
@@ -18,28 +20,37 @@ import java.sql.SQLException;
  *
  */
 public class SqlRequestExecuteListener implements ActionListener {
-	DataBaseManager connectionManager;
+	DataBaseManager dataBaseManager;
 	JTextField sqlRequestField;
+	JFrame frame;
 	/**
 	 * constructor
 	 * @param cn connection manager to work with
 	 * @param field field to listen on
+	 * @param frame parent frame
 	 */
-	public SqlRequestExecuteListener(DataBaseManager cn, JTextField field) {
-		this.connectionManager = cn;
+	public SqlRequestExecuteListener(DataBaseManager cn, JTextField field, JFrame frame) {
+		this.dataBaseManager = cn;
 		this.sqlRequestField = field;
+		this.frame = frame;
 	}
 		
 	
 	/**
+	 * Creates and shows analys frame
 	 * @param actionEvent every event
 	 */
 	public void actionPerformed(ActionEvent actionEvent){
 		
 //		if (analysesFrame == null) {
 		try {
-			analysesFrame = new AnalysesFrame(this.connectionManager, this.sqlRequestField.getText());
-			analysesFrame.setVisible(true);
+			analysesDataFrame = new AnalysesDataFrame(this.dataBaseManager, this.sqlRequestField.getText(), this.frame);
+			analysesDataFrame.setVisible(true);
+			
+			analysesFrame = new AnalysesFrame(this.frame, analysesDataFrame);
+			analysesFrame .setVisible(true);
+			
+			requestFrame.setVisible(false);
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(new JFrame(),ex.getMessage(),"Error!", JOptionPane.ERROR_MESSAGE);
 			loginFrame.setVisible(true);
