@@ -88,6 +88,7 @@ public class SqlRequestFrame extends JFrame{
 		totalGUI.add(report2);
 		totalGUI.add(backButton);
 		totalGUI.add(checkBox);
+		checkBox.setLocation(550,90);
 		return totalGUI;
 	}
 }
