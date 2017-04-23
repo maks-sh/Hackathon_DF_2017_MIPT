@@ -1,19 +1,17 @@
 package formsAndFrames;
 
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import customListeners.BackListener;
 import customListeners.ReportExecListener;
 import customListeners.SqlRequestExecuteListener;
 import dbEntities.DataBaseManager;
+import javafx.scene.control.CheckBox;
 
 /**
  * request frame
@@ -44,6 +42,7 @@ public class SqlRequestFrame extends JFrame{
 		this.setContentPane(this.createContentPaneForSqlRequestFrame(userName,parent));
 		this.setSize(xSize, ySize);
 		this.setLocationRelativeTo(null);
+
 	}
 
 	/**
@@ -59,7 +58,7 @@ public class SqlRequestFrame extends JFrame{
 		totalGUI.setLayout(null);
 		totalGUI.setBorder(BorderFactory.createTitledBorder("You are connected as: \""+user+"\""));
 
-		JButton backButton = builder.createButton("Back", 450, 90, 150, 30);
+		JButton backButton = builder.createButton("Back", 450, 90, 100, 30);
 		ActionListener backListener = new BackListener(this,parent);
 		backButton.addActionListener(backListener);
 
@@ -79,12 +78,16 @@ public class SqlRequestFrame extends JFrame{
 		JButton report2 = builder.createButton("Подозрительные счета",20,80,400,50);
 		report2.addActionListener(new ReportExecListener(dbManager, report2.getText(), this, reportMonth, reportYear));
 
+		JCheckBox checkBox = new JCheckBox();
+		checkBox.setLocation(550,90);
+
 //		totalGUI.add(executeButton);
 		totalGUI.add(reportMonth);
 		totalGUI.add(reportYear);
 		totalGUI.add(report1);
 		totalGUI.add(report2);
 		totalGUI.add(backButton);
+		totalGUI.add(checkBox);
 		return totalGUI;
 	}
 }
