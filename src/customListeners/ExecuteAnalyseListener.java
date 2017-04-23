@@ -42,7 +42,7 @@ public class ExecuteAnalyseListener implements ActionListener{
 			analysesDataFrame = new AnalysesDataFrame(this.frame.getAnalysesDataFrame().getDataBaseManager(), 
 					"select * from (" + this.frame.getAnalysesDataFrame().getStorage().getRequest() +
 					") t1, (" + this.frame.getAnalysesDataFrame().getStorage().getRequest() + ") t2 where t1." +
-							this.firstField.getSelectedItem().toString()+"=t2."+this.secondField.getSelectedItem().toString(), this.frame);
+							this.firstField.getSelectedItem().toString()+"=t2."+this.secondField.getSelectedItem().toString(), this.frame,null);
 			analysesDataFrame.setVisible(true);
 		} catch (SQLException ex) {
 			

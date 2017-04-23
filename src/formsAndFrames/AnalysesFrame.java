@@ -38,8 +38,8 @@ public class AnalysesFrame extends JFrame {
 
 	/**
 	 * constructor - creating specific Frame for analyses
-	 * @param cn databasemanager
-	 * @param sqlRequest request to execute
+//	 * @param cn databasemanager
+//	 * @param sqlRequest request to execute
 	 * @param parent frame
 	 * @return frame for analyses
 	 * @throws SQLException if smth wrong with SQL part of the connection
@@ -76,7 +76,7 @@ public class AnalysesFrame extends JFrame {
 		
 		
 		
-		String[] possibleActions = {"Найти совпадения"};
+		String[] possibleActions = {"пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"};
 		JComboBox actions = builder.createComboBox(possibleActions, 20, 20, 200, 30);
 		
 		String[] columnNames;

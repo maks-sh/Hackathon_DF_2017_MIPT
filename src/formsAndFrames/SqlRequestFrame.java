@@ -62,7 +62,7 @@ public class SqlRequestFrame extends JFrame{
 		
 		JTextField sqlRequestField = builder.createTextField("SQL Request", 20, 20, 400, 50);
 		//TODO just for tests
-		sqlRequestField.setText("select * from hr.employees");
+		sqlRequestField.setText("select * from customers");
 		
 		JButton executeButton = builder.createButton("Execute request", 450, 30, 150, 30);
 		ActionListener sqlRequestExecute = new SqlRequestExecuteListener(dbManager,sqlRequestField, this);

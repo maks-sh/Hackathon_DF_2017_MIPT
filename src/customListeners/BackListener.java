@@ -34,7 +34,7 @@ public class BackListener implements ActionListener {
 		if (loginFrame.equals(this.frame)) {
 			System.exit(1);
 		} else {
-			//TODO check on memory errors. (Is the frame killed by setting the visability "false"?)
+			//todo
 			this.frame.setVisible(false);
 			this.parent.setVisible(true);
 		}

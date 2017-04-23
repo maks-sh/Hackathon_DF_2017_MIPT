@@ -1,16 +1,17 @@
 package formsAndFrames;
 
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.*;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 
 import customListeners.BackListener;
 import dbEntities.DataBaseManager;
@@ -21,7 +22,7 @@ import dbEntities.RSAndRSMDStorage;
  * @author DenRUS
  *
  */
-public class AnalysesDataFrame extends JFrame {
+public class AnalysesDataFrame extends JPanel implements ActionListener,CellEditorListener{
 	
 	/**
 	 * rs and rsmd storage
@@ -40,21 +41,38 @@ public class AnalysesDataFrame extends JFrame {
 	 * @throws SQLException if smth wrong with SQL part of the connection
 	 * @throws ClassNotFoundException if smth wrong with JDBC
 	 */
-	public AnalysesDataFrame (DataBaseManager dbManager, String sqlRequest, JFrame parent) throws ClassNotFoundException, SQLException {
+	public  AnalysesDataFrame (DataBaseManager dbManager, String sqlRequest, JFrame parent,String reportName) throws ClassNotFoundException, SQLException {
+
+
+		JPanel jPanel = new JPanel();
+		JTable jTable=new JTable();
 		storage = new RSAndRSMDStorage();
-		this.setTitle(sqlRequest);
 		this.dataBaseManager = dbManager;
-//		TODO: show previous(sqlRequestFrame) on close
-//        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		 
-        JScrollPane scrollPane = new JScrollPane(dbManager.getResultAsTableFromDBM(sqlRequest,this.storage));
-         
-        this.getContentPane().add(scrollPane);
-        this.setPreferredSize(new Dimension(800, 500));
-        this.pack();
-        this.setLocationRelativeTo(null);
+
+		JButton button = new JButton("Save");
+		button.addActionListener(this);
+		Checkbox checkbox=new Checkbox("Certificate");
+
+		JScrollPane scrollPane = new JScrollPane(jTable= dbManager.getResultAsTableFromDBM(sqlRequest,this.storage));
+		jTable.getModel().addTableModelListener(new TableModelListener() {
+			@Override
+			public void tableChanged(TableModelEvent e) {
+				System.out.println(e);
+			}
+		});
+
+		jTable.getValueAt(jTable.getSelectedRow(),jTable.getSelectedColumn());
+
+		scrollPane.setPreferredSize(new Dimension(1000, 800));
+		add(scrollPane);
+		add(checkbox);
+		add(button);
+
+		setPreferredSize(new Dimension(450, 250));
+		setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 	}
+
+
 	/**
 	 * @return the dataBaseManager
 	 */
@@ -78,6 +96,22 @@ public class AnalysesDataFrame extends JFrame {
 	 */
 	public void setStorage(RSAndRSMDStorage storage) {
 		this.storage = storage;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+	}
+
+
+	@Override
+	public void editingStopped(ChangeEvent e) {
+
+	}
+
+	@Override
+	public void editingCanceled(ChangeEvent e) {
+
 	}
 }
 

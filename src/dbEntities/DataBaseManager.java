@@ -17,7 +17,7 @@ import formsAndFrames.AnalysesDataFrame;
  */
 public class DataBaseManager implements RequestExecutor {
 	private Connection dbConnection = null;
-	private String user = "den", pass = "parol123", dataBase = "jdbc:oracle:thin:@localhost:1521:orcl";
+	private String user = "hack_user", pass = "hack#421", dataBase = "jdbc:oracle:thin:@10.55.167.22:1521:hack01";
 
 	/**
 	 * @category testing constructor without creating a connection

@@ -1,6 +1,10 @@
 SELECT * from customers;
 
 INSERT INTO customers
+VALUES (1, 'Artem', 'Volodin', '4687342565', '12.08.2016', default, default);
+INSERT INTO customers
+VALUES (2, 'Vladimir', 'Khrunov', '4332333333', '19.12.2001', default, default);
+INSERT INTO customers
 VALUES (3, 'Ivan', 'Lebedev', '4313125989', '20.07.2016', default, default);
 INSERT INTO customers
 VALUES (4, 'Maksim', 'Shevchenko', '4515679008', '21.06.2016', default, default);

@@ -1,8 +1,6 @@
 package customListeners;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import dbEntities.DataBaseManager;
 
@@ -11,6 +9,7 @@ import formsAndFrames.AnalysesDataFrame;
 import formsAndFrames.AnalysesFrame;
 import formsAndFrames.SqlRequestFrame;
 
+import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
 
@@ -44,11 +43,27 @@ public class SqlRequestExecuteListener implements ActionListener {
 		
 //		if (analysesFrame == null) {
 		try {
-			analysesDataFrame = new AnalysesDataFrame(this.dataBaseManager, this.sqlRequestField.getText(), this.frame);
-			analysesDataFrame.setVisible(true);
-			
-			analysesFrame = new AnalysesFrame(this.frame, analysesDataFrame);
-			analysesFrame .setVisible(true);
+			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+
+			JFrame frame = new JFrame("DocumentEventDemo");
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setSize(dimension);
+
+			analysesDataFrame = new AnalysesDataFrame(this.dataBaseManager, this.sqlRequestField.getText(), this.frame,null);
+			JComponent newContentPane = analysesDataFrame;
+			newContentPane.setOpaque(true); // content panes must be opaque
+			frame.setContentPane(newContentPane);
+
+			// Display the window.
+			frame.pack();
+			frame.setVisible(true);
+			// Display in center
+			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 3);
+			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 3);
+			frame.setLocation(x, y);
+
+
+
 			
 			requestFrame.setVisible(false);
 		} catch (SQLException ex) {

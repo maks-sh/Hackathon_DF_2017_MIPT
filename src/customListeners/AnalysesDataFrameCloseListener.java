@@ -3,7 +3,7 @@ package customListeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
 /**
  * performs hiding of AnalysesDataFrame on pressing back button
@@ -11,20 +11,20 @@ import javax.swing.JFrame;
  *
  */
 public class AnalysesDataFrameCloseListener implements ActionListener {
-	JFrame frame;
+	JPanel jPanel;
 	/**
 	 * default constructor
-	 * @param frame frame that should be closed
+	 * @param jpanel frame that should be closed
 	 */
-	public AnalysesDataFrameCloseListener(JFrame frame) {
-		this.frame = frame;	
+	public AnalysesDataFrameCloseListener(JPanel jpanel) {
+		this.jPanel = jpanel;
 	}
 	/**
 	 * performs hiding
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.frame.setVisible(false);		
+		this.jPanel.setVisible(false);
 	}
 
 }
