@@ -38,19 +38,19 @@ public class ExecuteAnalyseListener implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 //		this.frame.getAnalysesDataFrame().getDataBaseManager().getResultAsTableFromDBM(, this.frame.)
-		try {
-			analysesDataFrame = new AnalysesDataFrame(this.frame.getAnalysesDataFrame().getDataBaseManager(), 
-					"select * from (" + this.frame.getAnalysesDataFrame().getStorage().getRequest() +
-					") t1, (" + this.frame.getAnalysesDataFrame().getStorage().getRequest() + ") t2 where t1." +
-							this.firstField.getSelectedItem().toString()+"=t2."+this.secondField.getSelectedItem().toString(), this.frame,null);
-			analysesDataFrame.setVisible(true);
-		} catch (SQLException ex) {
-			
-			JOptionPane.showMessageDialog(new JFrame(),ex.getMessage(),"Error!", JOptionPane.ERROR_MESSAGE);
-			
-		} catch (ClassNotFoundException ex1) {
-			JOptionPane.showMessageDialog(new JFrame(),ex1.getMessage(),"Error1!", JOptionPane.ERROR_MESSAGE);
-		}
+//		try {
+//			analysesDataFrame = new AnalysesDataFrame(this.frame.getAnalysesDataFrame().getDataBaseManager(),
+//					"select * from (" + this.frame.getAnalysesDataFrame().getStorage().getRequest() +
+//					") t1, (" + this.frame.getAnalysesDataFrame().getStorage().getRequest() + ") t2 where t1." +
+//							this.firstField.getSelectedItem().toString()+"=t2."+this.secondField.getSelectedItem().toString(), this.frame,null);
+//			analysesDataFrame.setVisible(true);
+//		} catch (SQLException ex) {
+//
+//			JOptionPane.showMessageDialog(new JFrame(),ex.getMessage(),"Error!", JOptionPane.ERROR_MESSAGE);
+//
+//		} catch (ClassNotFoundException ex1) {
+//			JOptionPane.showMessageDialog(new JFrame(),ex1.getMessage(),"Error1!", JOptionPane.ERROR_MESSAGE);
+//		}
 		
 	}
 

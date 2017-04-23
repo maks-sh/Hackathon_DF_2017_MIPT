@@ -2,6 +2,8 @@ package formsAndFrames;
 
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -9,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import customListeners.BackListener;
+import customListeners.ReportExecListener;
 import customListeners.SqlRequestExecuteListener;
 import dbEntities.DataBaseManager;
 
@@ -20,7 +23,7 @@ import dbEntities.DataBaseManager;
 public class SqlRequestFrame extends JFrame{
 	DataBaseManager dbManager;
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -34,15 +37,15 @@ public class SqlRequestFrame extends JFrame{
 	public SqlRequestFrame(String userName, String password, String database,JFrame parent) throws ClassNotFoundException, SQLException {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		this.dbManager = new DataBaseManager(userName,password,database);
-		int xSize = 620, ySize = 170;
+		int xSize = 700, ySize = 170;
 		this.setTitle(userName);
-	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		this.setContentPane(this.createContentPaneForSqlRequestFrame(userName,parent));
 		this.setSize(xSize, ySize);
-        this.setLocationRelativeTo(null);
-    }
-	
+		this.setLocationRelativeTo(null);
+	}
+
 	/**
 	 * creates a content pane for the frame
 	 * @param user user connected to the data base
@@ -51,28 +54,37 @@ public class SqlRequestFrame extends JFrame{
 	 */
 	public JPanel createContentPaneForSqlRequestFrame(String user,JFrame parent) {
 		FrameObjectsBuilder builder = new FrameObjectsBuilder();
-		
+
 		JPanel totalGUI = new JPanel();
 		totalGUI.setLayout(null);
 		totalGUI.setBorder(BorderFactory.createTitledBorder("You are connected as: \""+user+"\""));
-		
+
 		JButton backButton = builder.createButton("Back", 450, 90, 150, 30);
 		ActionListener backListener = new BackListener(this,parent);
 		backButton.addActionListener(backListener);
-		
-		JTextField sqlRequestField = builder.createTextField("SQL Request", 20, 20, 400, 50);
-		//TODO just for tests
-		sqlRequestField.setText("select * from customers");
-		
-		JButton executeButton = builder.createButton("Execute request", 450, 30, 150, 30);
-		ActionListener sqlRequestExecute = new SqlRequestExecuteListener(dbManager,sqlRequestField, this);
-		executeButton.addActionListener(sqlRequestExecute);
-		
-		totalGUI.add(executeButton);
-		totalGUI.add(sqlRequestField);
+
+		JTextField reportMonth = builder.createTextField("Month", 430, 20, 100, 50);
+		reportMonth.setText(new SimpleDateFormat("MM").format(new Date()));
+
+		JTextField reportYear = builder.createTextField("Year", 550, 20, 100, 50);
+		reportYear.setText(new SimpleDateFormat("yyyy").format(new Date()));
+
+//		JButton executeButton = builder.createButton("Execute request", 450, 30, 150, 30);
+//		ActionListener sqlRequestExecute = new SqlRequestExecuteListener(dbManager,sqlRequestField, this);
+//		executeButton.addActionListener(sqlRequestExecute);
+
+		JButton report1 = builder.createButton("Обязательный отчет по недвижимости",20,20,400,50);
+		report1.addActionListener(new ReportExecListener(dbManager, report1.getText(), this, reportMonth, reportYear));
+
+		JButton report2 = builder.createButton("Подозрительные счета",20,80,400,50);
+		report2.addActionListener(new ReportExecListener(dbManager, report2.getText(), this, reportMonth, reportYear));
+
+//		totalGUI.add(executeButton);
+		totalGUI.add(reportMonth);
+		totalGUI.add(reportYear);
+		totalGUI.add(report1);
+		totalGUI.add(report2);
 		totalGUI.add(backButton);
 		return totalGUI;
 	}
-	
-
 }

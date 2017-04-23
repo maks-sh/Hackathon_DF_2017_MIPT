@@ -5,6 +5,7 @@ import dbEntities.RSAndRSMDStorage;
 import formsAndFrames.AnalysesDataFrame;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -50,13 +51,31 @@ public class ReportExecListener implements ActionListener {
         try {
             JScrollPane scrollPane = new JScrollPane(dataBaseManager.getResultAsTableFromDBM(
                     String.format(sqlRequest, monthField.getText(), yearField.getText()), this.storage));
-            analysesDataFrame = new AnalysesDataFrame(scrollPane, frame);
-            analysesDataFrame.setVisible(true);
+            Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 
+            JFrame frame = new JFrame("DocumentEventDemo");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(dimension);
+
+            analysesDataFrame = new AnalysesDataFrame(dataBaseManager, scrollPane, frame, "report1");
+            JComponent newContentPane = analysesDataFrame;
+            newContentPane.setOpaque(true); // content panes must be opaque
+            frame.setContentPane(newContentPane);
+            // Display the window.
+            frame.pack();
+            frame.setVisible(true);
+
+            // Display in center
+            int x = (int) ((dimension.getWidth() - frame.getWidth()) / 3);
+            int y = (int) ((dimension.getHeight() - frame.getHeight()) / 3);
+            frame.setLocation(x, y);
+
+            analysesDataFrame.setVisible(true);
+            scrollPane.setVisible(true);
 //            analysesFrame = new AnalysesFrame(this.frame, analysesDataFrame);
 //            analysesFrame .setVisible(true);
 
-            requestFrame.setVisible(false);
+//            requestFrame.setVisible(false);
         } catch (SQLException | ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(new JFrame(),ex.getMessage(),"Error!", JOptionPane.ERROR_MESSAGE);
             loginFrame.setVisible(true);

@@ -41,7 +41,7 @@ public class AnalysesDataFrame extends JPanel implements ActionListener,CellEdit
 	 * @throws SQLException if smth wrong with SQL part of the connection
 	 * @throws ClassNotFoundException if smth wrong with JDBC
 	 */
-	public  AnalysesDataFrame (DataBaseManager dbManager, String sqlRequest, JFrame parent,String reportName) throws ClassNotFoundException, SQLException {
+	public  AnalysesDataFrame (DataBaseManager dbManager, JScrollPane jScrollPane, JFrame parent,String reportName) throws ClassNotFoundException, SQLException {
 
 
 		JPanel jPanel = new JPanel();
@@ -53,7 +53,7 @@ public class AnalysesDataFrame extends JPanel implements ActionListener,CellEdit
 		button.addActionListener(this);
 		Checkbox checkbox=new Checkbox("Certificate");
 
-		JScrollPane scrollPane = new JScrollPane(jTable= dbManager.getResultAsTableFromDBM(sqlRequest,this.storage));
+		JScrollPane scrollPane = jScrollPane;
 //		JTable finalJTable = jTable;
 //		jTable.getModel().addTableModelListener(new TableModelListener() {
 //			@Override
