@@ -55,20 +55,20 @@ public class LoginFrame extends JFrame {
 		 */
 		JTextField userNameField = builder.createTextField("Username", mainFrameLength - 500, 20, 150, 50);
 		//TODO just for test
-		userNameField.setText("den");
+		userNameField.setText("hack_user");
 		/**
 		 * Adding password field for user
 		 */
 		JTextField passwordField = builder.createPasswordField("Password", mainFrameLength - 325, 20, 150, 50);
 		//TODO just for tests
-		passwordField.setText("parol123");
+		passwordField.setText("hack#421");
 		
 		/**
 		 * Adding sqlRequest field
 		 */
 		JTextField dataBaseField = builder.createTextField("Database", mainFrameLength - 500, 80, 325, 50);
 		//TODO just for tests
-		dataBaseField.setText("jdbc:oracle:thin:@localhost:1521:orcl");
+		dataBaseField.setText("jdbc:oracle:thin:@10.55.167.22:1521:hack01");
 				
 		/**
 		 * creating connection button
