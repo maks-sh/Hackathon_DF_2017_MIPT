@@ -54,14 +54,20 @@ public class AnalysesDataFrame extends JPanel implements ActionListener,CellEdit
 		Checkbox checkbox=new Checkbox("Certificate");
 
 		JScrollPane scrollPane = new JScrollPane(jTable= dbManager.getResultAsTableFromDBM(sqlRequest,this.storage));
-		jTable.getModel().addTableModelListener(new TableModelListener() {
-			@Override
-			public void tableChanged(TableModelEvent e) {
-				System.out.println(e);
-			}
-		});
+//		JTable finalJTable = jTable;
+//		jTable.getModel().addTableModelListener(new TableModelListener() {
+//			@Override
+//			public void tableChanged(TableModelEvent tme) {
+//				if (tme.getType() == TableModelEvent.UPDATE) {
+//					System.out.println("");
+//					System.out.println("Cell " + tme.getFirstRow() + ", "
+//							+ tme.getColumn() + " changed. The new value: "
+//							+ finalJTable.getValueAt(tme.getFirstRow(),
+//							tme.getColumn()));
+//				}
+//			}
+//		});
 
-		jTable.getValueAt(jTable.getSelectedRow(),jTable.getSelectedColumn());
 
 		scrollPane.setPreferredSize(new Dimension(1000, 800));
 		add(scrollPane);

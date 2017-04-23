@@ -53,10 +53,10 @@ public class SqlRequestExecuteListener implements ActionListener {
 			JComponent newContentPane = analysesDataFrame;
 			newContentPane.setOpaque(true); // content panes must be opaque
 			frame.setContentPane(newContentPane);
-
 			// Display the window.
 			frame.pack();
 			frame.setVisible(true);
+
 			// Display in center
 			int x = (int) ((dimension.getWidth() - frame.getWidth()) / 3);
 			int y = (int) ((dimension.getHeight() - frame.getHeight()) / 3);
